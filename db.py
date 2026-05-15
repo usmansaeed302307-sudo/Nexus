@@ -4,17 +4,19 @@ Uses PyMySQL (pure Python, no system libs needed).
 Install: pip install pymysql
 """
 
+import os
 import pymysql
 import pymysql.cursors
 
 # ──────────────────────────────────────────────────────────────
-#  🔧  APNA MySQL USERNAME AUR PASSWORD YAHAN CHANGE KAREIN
+#  🔧  Railway MySQL Environment Variables
 # ──────────────────────────────────────────────────────────────
 DB_CONFIG = {
-    "host":        "localhost",
-    "user":        "root",          # apna MySQL username
-    "password":    "admin123",      # apna MySQL password yahan likho
-    "database":    "nexus_cms",
+    "host":        os.environ.get("MYSQLHOST", "localhost"),
+    "user":        os.environ.get("MYSQLUSER", "root"),
+    "password":    os.environ.get("MYSQLPASSWORD", "admin123"),
+    "database":    os.environ.get("MYSQLDATABASE", "nexus_cms"),
+    "port":        int(os.environ.get("MYSQLPORT", 3306)),
     "cursorclass": pymysql.cursors.DictCursor,
     "charset":     "utf8mb4",
     "autocommit":  False,
